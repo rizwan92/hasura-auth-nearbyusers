@@ -1,20 +1,20 @@
-version: '3.6'
+version: "3.6"
 services:
   postgres:
     image: postgis/postgis:latest
     restart: always
     volumes:
-    - db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
     ports:
-    - "5433:5432"
+      - "5433:5432"
   graphql-engine:
     image: hasura/graphql-engine:latest
     ports:
-    - "8080:8080"
+      - "8080:8080"
     depends_on:
-    - "postgres"
+      - "postgres"
     restart: always
     environment:
       ## postgres database to store Hasura metadata
@@ -26,7 +26,8 @@ services:
       ## enable debugging mode. It is recommended to disable this in production
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
-      HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS512", "key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArFBBnf+N2Mstv5vh9xFMzgv0KxcUl1+ik/dQZLMqAF2DdELdElJTtonr8Ur81i+zvC3H3Z5YyEYIGwyN18q58GYtegMTinX+pQN1Ld7CgAa5aTf5w802lYQkXH9ZCqwGqWJqAZTT+SInV29jcOhncFddxPg76i/yhX3eMKtZcxV/Qr+MRPgfM4StRXjGBOxVezmLc7m5basDR+yPQVf3/9zXlY5t7VR3vxPnnTYGnqaBb7IdbNwKtS/FQqLzK1u7B8qDXin9A58Ssue5o5Z5UfyTRUEAnuGL5SvavkZENeg/V047muKLLiIEZCpPe8jVTMEjbe+R6/LJg3BrdmR5BQIDAQAB\n-----END PUBLIC KEY-----\n"}'
+      HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS512","key":"-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArFBBnf+N2Mstv5vh9xFM\nzgv0KxcUl1+ik/dQZLMqAF2DdELdElJTtonr8Ur81i+zvC3H3Z5YyEYIGwyN18q5\n8GYtegMTinX+pQN1Ld7CgAa5aTf5w802lYQkXH9ZCqwGqWJqAZTT+SInV29jcOhn\ncFddxPg76i/yhX3eMKtZcxV/Qr+MRPgfM4StRXjGBOxVezmLc7m5basDR+yPQVf3\n/9zXlY5t7VR3vxPnnTYGnqaBb7IdbNwKtS/FQqLzK1u7B8qDXin9A58Ssue5o5Z5\nUfyTRUEAnuGL5SvavkZENeg/V047muKLLiIEZCpPe8jVTMEjbe+R6/LJg3BrdmR5\nBQIDAQAB\n-----END PUBLIC KEY-----\n"}'
+      HASURA_GRAPHQL_ADMIN_SECRET: "myadminsecretkey"
       ## uncomment next line to run console offline (i.e load console assets from server instead of CDN)
       # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
       ## uncomment next line to set an admin secret

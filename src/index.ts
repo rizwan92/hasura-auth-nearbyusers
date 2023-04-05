@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { generateJWT } from "./jwt.js";
+import { generateJWT, verifyJWT } from "./jwt.js";
 
 const app = express();
 app.use(express.json());
@@ -11,10 +11,10 @@ app.get("/", (req: Request, res: Response) => {
 
 app.post("/api/auth", (req: Request, res: Response) => {
   const { username, password } = req.body;
-  if (username && password) {
+  if (username && password === "admin") {
     const token = generateJWT({ userId: username });
-    console.log(token);
-    res.json({ token });
+    const payload = verifyJWT(token);
+    res.json({ token, payload });
   } else {
     res.status(400).json({ error: "Invalid username or password" });
   }

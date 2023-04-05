@@ -13,7 +13,7 @@ interface JWTParams {
 // const JWT_SECRET = process.env.JWT_SECRET || "secret";
 
 const JWT_CONFIG: jwt.SignOptions = {
-  algorithm: "RS256",
+  algorithm: "RS512",
   expiresIn: "10h",
 };
 
@@ -31,9 +31,11 @@ export function generateJWT(params: JWTParams): string {
       "x-hasura-default-role": "user",
       "x-hasura-allowed-roles": ["user", "admin"],
       "x-hasura-user-id": params.userId,
-      "x-hasura-org-id": "456",
-      "x-hasura-custom": "custom-value",
     },
   };
   return jwt.sign(payload, private_key, JWT_CONFIG);
+}
+
+export function verifyJWT(token: string): any {
+  return jwt.verify(token, private_key, { algorithms: ["RS512"] });
 }
