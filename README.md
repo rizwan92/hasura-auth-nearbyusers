@@ -17,10 +17,10 @@ public.pem is PEM-encoded string or as an X509 certificate. You can use the publ
 3. copy public.pem file to hasura docker container
 
 ```
-HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS512", "key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArFBBnf+N2Mstv5vh9xFMzgv0KxcUl1+ik/dQZLMqAF2DdELdElJTtonr8Ur81i+zvC3H3Z5YyEYIGwyN18q58GYtegMTinX+pQN1Ld7CgAa5aTf5w802lYQkXH9ZCqwGqWJqAZTT+SInV29jcOhncFddxPg76i/yhX3eMKtZcxV/Qr+MRPgfM4StRXjGBOxVezmLc7m5basDR+yPQVf3/9zXlY5t7VR3vxPnnTYGnqaBb7IdbNwKtS/FQqLzK1u7B8qDXin9A58Ssue5o5Z5UfyTRUEAnuGL5SvavkZENeg/V047muKLLiIEZCpPe8jVTMEjbe+R6/LJg3BrdmR5BQIDAQAB\n-----END PUBLIC KEY-----\n"}'
+HASURA_GRAPHQL_JWT_SECRET: '{"type":"RS512","key":"-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArFBBnf+N2Mstv5vh9xFM\nzgv0KxcUl1+ik/dQZLMqAF2DdELdElJTtonr8Ur81i+zvC3H3Z5YyEYIGwyN18q5\n8GYtegMTinX+pQN1Ld7CgAa5aTf5w802lYQkXH9ZCqwGqWJqAZTT+SInV29jcOhn\ncFddxPg76i/yhX3eMKtZcxV/Qr+MRPgfM4StRXjGBOxVezmLc7m5basDR+yPQVf3\n/9zXlY5t7VR3vxPnnTYGnqaBb7IdbNwKtS/FQqLzK1u7B8qDXin9A58Ssue5o5Z5\nUfyTRUEAnuGL5SvavkZENeg/V047muKLLiIEZCpPe8jVTMEjbe+R6/LJg3BrdmR5\nBQIDAQAB\n-----END PUBLIC KEY-----\n"}'
 ```
 
-## CUSTOM FUCNTIONS
+## CUSTOM FUCNTIONS to find near by users
 
 ```
 CREATE FUNCTION neary_by_user(userid Integer, radius Integer)
@@ -41,3 +41,5 @@ WHERE u.id != userid AND
 $$ LANGUAGE sql STABLE;
 
 ```
+
+
